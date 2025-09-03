@@ -18,11 +18,11 @@ public class Expense {
     private String expense_type;
 
     @Column(name = "expense_price")
-    private String amount;
+    private int amount;
 
     public Expense() {}
 
-    public Expense(String expenseName, String expense_type, String amount) {
+    public Expense(String expenseName, String expense_type, int amount) {
         this.expenseName = expenseName;
         this.expense_type = expense_type;
         this.amount = amount;
@@ -52,11 +52,21 @@ public class Expense {
         this.expense_type = expense_type;
     }
 
-    public String getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    @Override
+    public String toString() {
+        return "Expense{" +
+                "expenseId=" + expenseId +
+                ", expenseName='" + expenseName + '\'' +
+                ", expense_type='" + expense_type + '\'' +
+                ", amount='" + amount + '\'' +
+                '}';
     }
 }
