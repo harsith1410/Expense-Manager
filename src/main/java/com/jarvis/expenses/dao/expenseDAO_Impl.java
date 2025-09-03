@@ -22,8 +22,7 @@ public class expenseDAO_Impl implements expenseDAO{
     @Override
     public List<Expense> Show_All_Expenses() {
         TypedQuery<Expense> query = em.createQuery("Select e from Expense e", Expense.class);
-        List<Expense> expenses = query.getResultList();
-        return expenses;
+        return query.getResultList();
     }
 
     @Override
@@ -69,7 +68,7 @@ public class expenseDAO_Impl implements expenseDAO{
 
     @Override
     @Transactional
-    public void UpdateExpense(int id, Expense update_expense) {
+    public Expense UpdateExpense(int id, Expense update_expense) {
 
         Expense expense = em.find(Expense.class, id);
         if(expense!=null) {
@@ -79,6 +78,7 @@ public class expenseDAO_Impl implements expenseDAO{
         }
         em.merge(expense);
         System.out.println("Expense updated");
+        return expense;
 
     }
 

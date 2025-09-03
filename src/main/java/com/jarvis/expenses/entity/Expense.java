@@ -11,6 +11,9 @@ public class Expense {
     @Column(name = "serial_no")
     private int expenseId;
 
+    @Column(name = "expense_date")
+    private String expenseDate;
+
     @Column(name = "expense_name")
     private String expenseName;
 
@@ -22,7 +25,8 @@ public class Expense {
 
     public Expense() {}
 
-    public Expense(String expenseName, String expense_type, int amount) {
+    public Expense(String expenseDate,String expenseName, String expense_type, int amount) {
+        this.expenseDate = expenseDate;
         this.expenseName = expenseName;
         this.expense_type = expense_type;
         this.amount = amount;
@@ -34,6 +38,14 @@ public class Expense {
 
     public void setExpenseId(int expenseId) {
         this.expenseId = expenseId;
+    }
+
+    public String getExpenseDate() {
+        return expenseDate;
+    }
+
+    public void setExpenseDate(String expenseDate) {
+        this.expenseDate = expenseDate;
     }
 
     public String getExpenseName() {
@@ -64,9 +76,10 @@ public class Expense {
     public String toString() {
         return "Expense{" +
                 "expenseId=" + expenseId +
+                ", expenseDate='" + expenseDate + '\'' +
                 ", expenseName='" + expenseName + '\'' +
                 ", expense_type='" + expense_type + '\'' +
-                ", amount='" + amount + '\'' +
+                ", amount=" + amount +
                 '}';
     }
 }

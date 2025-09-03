@@ -19,18 +19,5 @@ public class ExpenseManagerApplication {
 		SpringApplication.run(ExpenseManagerApplication.class, args);
 	}
 
-	@Bean
-	public CommandLineRunner commandLineRunner(expenseDAO expenseDAO) {
-		return runner ->{
-			addExpense(expenseDAO);
-		};
-	}
 
-	private void addExpense(expenseDAO expenseDAO) {
-		List<Expense> expenses = new ArrayList<>();
-		expenses=expenseDAO.Show_Expense_byType("Income");
-		for (Expense expense : expenses) {
-			System.out.println(expense);
-		}
-	}
 }
