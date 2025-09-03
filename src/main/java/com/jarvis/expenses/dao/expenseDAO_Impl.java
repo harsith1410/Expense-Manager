@@ -46,7 +46,7 @@ public class expenseDAO_Impl implements expenseDAO{
         Query.setParameter("type", type);
         List<Expense> expenses = Query.getResultList();
 
-        return List.of();
+        return expenses;
     }
 
     @Override
@@ -69,20 +69,24 @@ public class expenseDAO_Impl implements expenseDAO{
 
     @Override
     @Transactional
-    public void UpdateExpense(Expense expense) {
-        expense = em.find(Expense.class, expense.getExpenseId());
-        System.out.println(expense);
+    public void UpdateExpense(int id, Expense update_expense) {
 
+        Expense expense = em.find(Expense.class, id);
+        if(expense!=null) {
+            expense.setExpenseName(update_expense.getExpenseName());
+            expense.setExpense_type(update_expense.getExpense_type());
+            expense.setAmount(update_expense.getAmount());
+        }
         em.merge(expense);
-
-        System.out.println(expense);
         System.out.println("Expense updated");
 
-        return;
     }
 
     @Override
-    public String DeleteExpense(Expense expense) {
-        return "";
+    @Transactional
+    public void DeleteExpense(int id) {
+        Expense expense = em.find(Expense.class, id);
+        em.remove(expense);
+        System.out.println("Expense deleted");
     }
 }

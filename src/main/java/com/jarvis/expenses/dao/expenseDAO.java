@@ -11,7 +11,7 @@ public interface expenseDAO {
     public List<Expense> Show_Expense_byType(String expense_type);
     public Expense Show_Expense_byId(int expense_id);
     public void AddExpense(Expense expense);
-    public void UpdateExpense(Expense expense);
-    public String DeleteExpense(Expense expense);
+    public void UpdateExpense(int id,Expense expense);
+    public void DeleteExpense(int id);
 
 }

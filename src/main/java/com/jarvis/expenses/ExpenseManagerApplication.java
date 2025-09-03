@@ -6,7 +6,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.Lifecycle;
 import org.springframework.context.annotation.Bean;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 public class ExpenseManagerApplication {
@@ -23,8 +27,10 @@ public class ExpenseManagerApplication {
 	}
 
 	private void addExpense(expenseDAO expenseDAO) {
-		Expense expense = new Expense("Food","Expense",250);
-		expenseDAO.AddExpense(expense);
-		System.out.println("Added expense");
+		List<Expense> expenses = new ArrayList<>();
+		expenses=expenseDAO.Show_Expense_byType("Income");
+		for (Expense expense : expenses) {
+			System.out.println(expense);
+		}
 	}
 }
