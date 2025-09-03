@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <title>Save Expense</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3>Expense Directory</h3>
+    <hr>
+
+    <p class="h4 mb-4">Save Expense</p>
+
+    <form action="#" th:action="@{/save}"
+          th:object="${expense}" method="POST">
+
+
+        <input type="hidden" th:field="*{expenseId}" />
+
+        <div class="mb-3">
+            <label for="expenseDate" class="form-label">Expense Date</label>
+            <input type="text" id="expenseDate" th:field="*{expenseDate}"
+                   class="form-control w-25" placeholder="Enter date (e.g., YYYY-MM-DD)">
+        </div>
+
+        <div class="mb-3">
+            <label for="expenseName" class="form-label">Expense Detail</label>
+            <input type="text" id="expenseName" th:field="*{expenseName}"
+                   class="form-control w-25" placeholder="Coffee, Groceries">
+        </div>
+
+        <div class="mb-3">
+            <label for="expense_type" class="form-label">Expense Type</label>
+            <select class="form-select" id="expense_type" th:field="*{expense_type}">
+                <option value="" disabled>-- Select Type --</option>
+                <option th:value="EXPENSE">Expense</option>
+                <option th:value="INCOME">Income</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="amount" class="form-label">Amount</label>
+            <input type="text" id="amount" th:field="*{amount}"
+                   class="form-control w-25" placeholder="0">
+        </div>
+
+        <button type="submit" class="btn btn-info col-2">Save</button>
+
+    </form>
+
+    <hr>
+    <a th:href="@{/expenses}">Back to Expenses List</a>
+
+</div>
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+

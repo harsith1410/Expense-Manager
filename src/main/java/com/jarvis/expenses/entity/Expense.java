@@ -26,9 +26,9 @@ public class Expense {
     public Expense() {}
 
     public Expense(String expenseDate,String expenseName, String expense_type, int amount) {
-        this.expenseDate = expenseDate;
-        this.expenseName = expenseName;
-        this.expense_type = expense_type;
+        this.expenseDate = expenseDate.toUpperCase();
+        this.expenseName = expenseName.toUpperCase();
+        this.expense_type = expense_type.toUpperCase();
         this.amount = amount;
     }
 
@@ -45,7 +45,7 @@ public class Expense {
     }
 
     public void setExpenseDate(String expenseDate) {
-        this.expenseDate = expenseDate;
+        this.expenseDate = expenseDate.toUpperCase();
     }
 
     public String getExpenseName() {
@@ -53,7 +53,7 @@ public class Expense {
     }
 
     public void setExpenseName(String expenseName) {
-        this.expenseName = expenseName;
+        this.expenseName = expenseName.toUpperCase();
     }
 
     public String getExpense_type() {
@@ -61,11 +61,11 @@ public class Expense {
     }
 
     public void setExpense_type(String expense_type) {
-        this.expense_type = expense_type;
+        this.expense_type = expense_type.toUpperCase();
     }
 
     public int getAmount() {
-        return amount;
+        return Math.abs(amount);
     }
 
     public void setAmount(int amount) {

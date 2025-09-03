@@ -17,10 +17,13 @@ public interface expenseService {
 
     void addExpense(Expense expense);
 
-    Expense updateExpense(int id,Expense expense);
+    void updateExpense(Expense expense);
 
     void deleteExpense(int id);
 
+    int get_Expense_Amount();
+
+    int get_Income_Amount();
 
 
 

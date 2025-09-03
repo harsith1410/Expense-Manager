@@ -3,6 +3,7 @@ package com.jarvis.expenses.service;
 
 import com.jarvis.expenses.dao.expenseDAO;
 import com.jarvis.expenses.entity.Expense;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +13,8 @@ public class expenseServiceImpl implements expenseService{
 
     private expenseDAO theExpenseDAO;
 
-    public void setTheExpenseDAO(expenseDAO theExpenseDAO) {
+    @Autowired
+    public void setTheExpenseDAO(expenseDAO theExpenseDAO) { //
         this.theExpenseDAO = theExpenseDAO;
     }
 
@@ -44,13 +46,26 @@ public class expenseServiceImpl implements expenseService{
     }
 
     @Override
-    public Expense updateExpense(int id,Expense expense) {
+    public void updateExpense(Expense expense) {
 
-        return theExpenseDAO.UpdateExpense(id, expense);
+        Expense expense1 = theExpenseDAO.UpdateExpense(expense);
+        System.out.println("Expense updated" + expense1);
     }
 
     @Override
     public void deleteExpense(int id) {
-        deleteExpense(id);
+        theExpenseDAO.DeleteExpense(id);
     }
+
+    @Override
+    public int get_Expense_Amount() {
+        return theExpenseDAO.get_Expense_Amount();
+    }
+
+    @Override
+    public int get_Income_Amount() {
+        return theExpenseDAO.get_Income_Amount();
+    }
+
+
 }

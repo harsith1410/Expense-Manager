@@ -60,6 +60,10 @@ public class expenseDAO_Impl implements expenseDAO{
     @Transactional
     public void AddExpense(Expense expense) {
 
+        if (expense.getExpense_type().equals("Expense")) {
+            expense.setAmount(expense.getAmount()*-1);
+        }
+
         em.persist(expense);
         System.out.println("Expense added");
 
@@ -68,17 +72,18 @@ public class expenseDAO_Impl implements expenseDAO{
 
     @Override
     @Transactional
-    public Expense UpdateExpense(int id, Expense update_expense) {
+    public Expense UpdateExpense(Expense update_expense) {
 
-        Expense expense = em.find(Expense.class, id);
-        if(expense!=null) {
-            expense.setExpenseName(update_expense.getExpenseName());
-            expense.setExpense_type(update_expense.getExpense_type());
-            expense.setAmount(update_expense.getAmount());
+        if (update_expense.getExpense_type().equals("Expense")) {
+            update_expense.setAmount(Math.abs(update_expense.getAmount())*-1);
         }
-        em.merge(expense);
+        else{
+            update_expense.setAmount(Math.abs(update_expense.getAmount()));
+        }
+
+        em.merge(update_expense);
         System.out.println("Expense updated");
-        return expense;
+        return update_expense;
 
     }
 
@@ -89,4 +94,26 @@ public class expenseDAO_Impl implements expenseDAO{
         em.remove(expense);
         System.out.println("Expense deleted");
     }
+
+    @Override
+    public int get_Expense_Amount() {
+        List<Expense> expenses = Show_Expense_byType("EXPENSE");
+        int amt = 0;
+        for (Expense expense : expenses) {
+            amt += expense.getAmount();
+        }
+        return amt;
+    }
+
+    @Override
+    public int get_Income_Amount() {
+        List<Expense> expenses = Show_Expense_byType("INCOME");
+        int amt = 0;
+        for (Expense expense : expenses) {
+            amt += expense.getAmount();
+        }
+        return amt;
+    }
+
+
 }
