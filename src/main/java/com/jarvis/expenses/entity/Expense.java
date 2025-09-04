@@ -8,14 +8,20 @@ public class Expense {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "serial_no")
-    private int expenseId;
+    @Column(name = "expense_id")
+    private int id;
+
+    @Column(name = "expense_user")
+    private String expenseUser;
 
     @Column(name = "expense_date")
     private String expenseDate;
 
-    @Column(name = "expense_name")
-    private String expenseName;
+    @Column(name = "expense_category")
+    private String expenseCategory;
+
+    @Column(name = "expense_details")
+    private String expenseDetails;
 
     @Column(name = "expense_type")
     private String expense_type;
@@ -25,19 +31,29 @@ public class Expense {
 
     public Expense() {}
 
-    public Expense(String expenseDate,String expenseName, String expense_type, int amount) {
+    public Expense(String expenseUser, String expenseDate, String expenseCategory, String expenseName, String expense_type, int amount) {
+        this.expenseUser = expenseUser.toUpperCase();
         this.expenseDate = expenseDate.toUpperCase();
-        this.expenseName = expenseName.toUpperCase();
+        this.expenseCategory = expenseCategory.toUpperCase();
+        this.expenseDetails = expenseName.toUpperCase();
         this.expense_type = expense_type.toUpperCase();
         this.amount = amount;
     }
 
-    public int getExpenseId() {
-        return expenseId;
+    public int getId() {
+        return id;
     }
 
-    public void setExpenseId(int expenseId) {
-        this.expenseId = expenseId;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getExpenseUser() {
+        return expenseUser;
+    }
+
+    public void setExpenseUser(String expenseUser) {
+        this.expenseUser = expenseUser.toUpperCase();
     }
 
     public String getExpenseDate() {
@@ -48,12 +64,20 @@ public class Expense {
         this.expenseDate = expenseDate.toUpperCase();
     }
 
-    public String getExpenseName() {
-        return expenseName;
+    public String getExpenseCategory() {
+        return expenseCategory;
     }
 
-    public void setExpenseName(String expenseName) {
-        this.expenseName = expenseName.toUpperCase();
+    public void setExpenseCategory(String expenseCategory) {
+        this.expenseCategory = expenseCategory.toUpperCase();
+    }
+
+    public String getExpenseDetails() {
+        return expenseDetails;
+    }
+
+    public void setExpenseDetails(String expenseDetails) {
+        this.expenseDetails = expenseDetails;
     }
 
     public String getExpense_type() {
@@ -70,16 +94,5 @@ public class Expense {
 
     public void setAmount(int amount) {
         this.amount = amount;
-    }
-
-    @Override
-    public String toString() {
-        return "Expense{" +
-                "expenseId=" + expenseId +
-                ", expenseDate='" + expenseDate + '\'' +
-                ", expenseName='" + expenseName + '\'' +
-                ", expense_type='" + expense_type + '\'' +
-                ", amount=" + amount +
-                '}';
     }
 }

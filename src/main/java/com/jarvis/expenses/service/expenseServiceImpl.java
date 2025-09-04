@@ -19,42 +19,37 @@ public class expenseServiceImpl implements expenseService{
     }
 
     @Override
-    public List<Expense> getAllExpenses() {
-        return theExpenseDAO.Show_All_Expenses();
+    public List<Expense> getAllExpenses_ByUser(String user) {
+        return theExpenseDAO.getAllExpenses_ByUser(user.toUpperCase());
+    }
+
+    @Override
+    public List<Expense> getAllExpenses_ByType(String Type) {
+        return theExpenseDAO.getAllExpenses_ByType(Type.toUpperCase());
     }
 
     @Override
     public Expense getExpenseById(int id) {
-        return theExpenseDAO.Show_Expense_byId(id);
+        return theExpenseDAO.getExpenseById(id);
     }
 
     @Override
-    public List<Expense> getExpensesByCategory(String category) {
-        return theExpenseDAO.Show_Expense_byName(category);
-    }
+    public void saveExpense(Expense expense) {
 
-    @Override
-    public List<Expense> getExpensesByType(String type) {
-        return theExpenseDAO.Show_Expense_byType(type);
-    }
-
-    @Override
-    public void addExpense(Expense expense) {
-
-        theExpenseDAO.AddExpense(expense);
-
+        theExpenseDAO.saveExpense(expense);
+        System.out.println("Expense save service done");
     }
 
     @Override
     public void updateExpense(Expense expense) {
-
-        Expense expense1 = theExpenseDAO.UpdateExpense(expense);
-        System.out.println("Expense updated" + expense1);
+        theExpenseDAO.updateExpense(expense);
+        System.out.println("Expense update service done");
     }
 
     @Override
     public void deleteExpense(int id) {
-        theExpenseDAO.DeleteExpense(id);
+        theExpenseDAO.deleteExpense(id);
+        System.out.println("Expense delete service done");
     }
 
     @Override
@@ -66,6 +61,55 @@ public class expenseServiceImpl implements expenseService{
     public int get_Income_Amount() {
         return theExpenseDAO.get_Income_Amount();
     }
+
+    //    @Override
+//    public List<Expense> getAllExpenses() {
+//        return theExpenseDAO.Show_All_Expenses();
+//    }
+//
+//    @Override
+//    public Expense getExpenseById(int id) {
+//        return theExpenseDAO.Show_Expense_byId(id);
+//    }
+//
+//    @Override
+//    public List<Expense> getExpensesByCategory(String category) {
+//        return theExpenseDAO.Show_Expense_byName(category);
+//    }
+//
+//    @Override
+//    public List<Expense> getExpensesByType(String type) {
+//        return theExpenseDAO.Show_Expense_byType(type);
+//    }
+//
+//    @Override
+//    public void addExpense(Expense expense) {
+//
+//        theExpenseDAO.AddExpense(expense);
+//
+//    }
+//
+//    @Override
+//    public void updateExpense(Expense expense) {
+//
+//        Expense expense1 = theExpenseDAO.UpdateExpense(expense);
+//        System.out.println("Expense updated" + expense1);
+//    }
+//
+//    @Override
+//    public void deleteExpense(int id) {
+//        theExpenseDAO.DeleteExpense(id);
+//    }
+//
+//    @Override
+//    public int get_Expense_Amount() {
+//        return theExpenseDAO.get_Expense_Amount();
+//    }
+//
+//    @Override
+//    public int get_Income_Amount() {
+//        return theExpenseDAO.get_Income_Amount();
+//    }
 
 
 }

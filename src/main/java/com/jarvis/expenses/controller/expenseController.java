@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -26,7 +24,8 @@ public class expenseController {
     @GetMapping("/expenses")
     public String list_expenses(Model model) {
 
-        List<Expense> list = service.getAllExpenses();
+        List<Expense> list = service.getAllExpenses_ByUser("ADMIN");
+        model.addAttribute("user","ADMIN");
         model.addAttribute("expenses", list);
 
         int expense_amt = service.get_Expense_Amount();
@@ -42,29 +41,31 @@ public class expenseController {
     }
 
     @GetMapping("/expenses/add")
-    public String Add(Model theModel) {
+    public String Add(@RequestParam("User") String User,Model theModel) {
 
         Expense theExpense = new Expense();
 
         theModel.addAttribute("expense", theExpense);
+        theModel.addAttribute("user", User);
 
         return "expenseForm";
     }
 
     @GetMapping("/update")
-    public String Update(@RequestParam("expenseId") int theId, Model theModel) {
+    public String Update(@RequestParam("Id") int theId,@RequestParam("User") String User, Model theModel) {
 
         Expense theExpense = service.getExpenseById(theId);
 
 
         theModel.addAttribute("expense", theExpense);
+        theModel.addAttribute("user", User);
 
-        // send over to our form
         return "updateForm";
     }
 
     @PostMapping("/update/save")
     public String Updatesave(@ModelAttribute("expense") Expense theExpense) {
+        theExpense.setExpenseUser("ADMIN");
         service.updateExpense(theExpense);
         return "redirect:/expenses";
     }
@@ -72,14 +73,14 @@ public class expenseController {
     @PostMapping("/save")
     public String save(@ModelAttribute("expense") Expense theExpense) {
 
+        theExpense.setExpenseUser("ADMIN");
 
-        service.addExpense(theExpense);
-
+        service.saveExpense(theExpense);
         return "redirect:/expenses";
     }
 
     @GetMapping("/delete")
-    public String delete(@RequestParam("expenseId") int theId) {
+    public String delete(@RequestParam("Id") int theId) {
 
         service.deleteExpense(theId);
 

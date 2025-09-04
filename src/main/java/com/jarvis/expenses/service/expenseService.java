@@ -7,23 +7,41 @@ import java.util.List;
 
 public interface expenseService {
 
-    List<Expense> getAllExpenses();
+    public List<Expense> getAllExpenses_ByUser(String user);
 
-    List<Expense> getExpensesByCategory(String category);
+    public List<Expense> getAllExpenses_ByType(String Type);
 
-    List<Expense> getExpensesByType(String type);
+    public Expense getExpenseById(int id);
 
-    Expense getExpenseById(int id);
+    public void saveExpense(Expense expense);
 
-    void addExpense(Expense expense);
+    public void updateExpense(Expense expense);
 
-    void updateExpense(Expense expense);
+    public void deleteExpense(int id);
 
-    void deleteExpense(int id);
+    public int get_Expense_Amount();
 
-    int get_Expense_Amount();
+    public int get_Income_Amount();
 
-    int get_Income_Amount();
+
+
+//    List<Expense> getAllExpenses();
+//
+//    List<Expense> getExpensesByCategory(String category);
+//
+//    List<Expense> getExpensesByType(String type);
+//
+//    Expense getExpenseById(int id);
+//
+//    void addExpense(Expense expense);
+//
+//    void updateExpense(Expense expense);
+//
+//    void deleteExpense(int id);
+//
+//    int get_Expense_Amount();
+//
+//    int get_Income_Amount();
 
 
 
