@@ -62,13 +62,15 @@
         <h3>Expense Directory</h3>
         <div>
             <span class="me-3">Welcome, <b th:text="${user}">ADMIN</b></span>
-            <a th:href="@{/expenses/add(User=${user})}" class="btn btn-primary">
+            <a th:href="@{/expenses/add(User=${user})}" class="btn btn-primary card-glow-primary text-white">
                 Add Expense
             </a>
+            <a th:action="@{/logout}" class="btn btn-danger card-glow-danger text-white">
+                Logout
+            </a>
+
         </div>
-        <form th:action="@{/logout}" method="POST" class="d-flex">
-            <button type="submit" class="btn btn-outline-light">Logout</button>
-        </form>
+
 
     </div>
 
