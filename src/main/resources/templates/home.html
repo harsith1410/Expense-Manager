@@ -60,15 +60,19 @@
 
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3>Expense Directory</h3>
-        <div>
-            <span class="me-3">Welcome, <b th:text="${user}">ADMIN</b></span>
-            <a th:href="@{/expenses/add(User=${user})}" class="btn btn-primary card-glow-primary text-white">
+        <div class="d-flex align-items-center gap-3">
+            <span>Welcome, <b th:text="${user}">ADMIN</b></span>
+
+            <a th:href="@{/expenses/add(User=${user})}"
+               class="btn btn-primary card-glow-primary text-white">
                 Add Expense
             </a>
-            <a th:action="@{/logout}" class="btn btn-danger card-glow-danger text-white">
-                Logout
-            </a>
 
+            <form th:action="@{/logout}" method="POST" class="m-0">
+                <button type="submit" class="btn btn-danger card-glow-danger text-white">
+                    Logout
+                </button>
+            </form>
         </div>
 
 
