@@ -24,8 +24,8 @@ public class expenseServiceImpl implements expenseService{
     }
 
     @Override
-    public List<Expense> getAllExpenses_ByType(String Type) {
-        return theExpenseDAO.getAllExpenses_ByType(Type.toUpperCase());
+    public List<Expense> getAllExpenses_ByType(String Type,String user) {
+        return theExpenseDAO.getAllExpenses_ByType(Type.toUpperCase(),user);
     }
 
     @Override
@@ -53,13 +53,13 @@ public class expenseServiceImpl implements expenseService{
     }
 
     @Override
-    public int get_Expense_Amount() {
-        return theExpenseDAO.get_Expense_Amount();
+    public int get_Expense_Amount(String user) {
+        return theExpenseDAO.get_Expense_Amount(user.toUpperCase());
     }
 
     @Override
-    public int get_Income_Amount() {
-        return theExpenseDAO.get_Income_Amount();
+    public int get_Income_Amount(String user) {
+        return theExpenseDAO.get_Income_Amount(user.toUpperCase());
     }
 
     //    @Override

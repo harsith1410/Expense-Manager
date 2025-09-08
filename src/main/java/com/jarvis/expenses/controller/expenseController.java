@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -21,17 +23,18 @@ public class expenseController {
         this.service = service;
     }
 
-    @GetMapping("/expenses")
-    public String list_expenses(Model model) {
 
-        List<Expense> list = service.getAllExpenses_ByUser("ADMIN");
-        model.addAttribute("user","ADMIN");
+    @GetMapping("/expenses")
+    public String list_expenses(Principal principal, Model model) {
+
+        List<Expense> list = service.getAllExpenses_ByUser(principal.getName());
+        model.addAttribute("user",principal.getName());
         model.addAttribute("expenses", list);
 
-        int expense_amt = service.get_Expense_Amount();
+        int expense_amt = service.get_Expense_Amount(principal.getName());
         model.addAttribute("e_amt", expense_amt);
 
-        int income_amt = service.get_Income_Amount();
+        int income_amt = service.get_Income_Amount(principal.getName());
         model.addAttribute("income_amt", income_amt);
 
         int net_total =income_amt-expense_amt;
@@ -64,16 +67,16 @@ public class expenseController {
     }
 
     @PostMapping("/update/save")
-    public String Updatesave(@ModelAttribute("expense") Expense theExpense) {
-        theExpense.setExpenseUser("ADMIN");
+    public String Updatesave(@ModelAttribute("expense") Expense theExpense,Principal principal) {
+        theExpense.setExpenseUser(principal.getName());
         service.updateExpense(theExpense);
         return "redirect:/expenses";
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute("expense") Expense theExpense) {
+    public String save(@ModelAttribute("expense") Expense theExpense,Principal principal) {
 
-        theExpense.setExpenseUser("ADMIN");
+        theExpense.setExpenseUser(principal.getName());
 
         service.saveExpense(theExpense);
         return "redirect:/expenses";

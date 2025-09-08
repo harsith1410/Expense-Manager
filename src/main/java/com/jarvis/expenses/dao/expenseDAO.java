@@ -8,7 +8,7 @@ public interface expenseDAO {
 
     public List<Expense> getAllExpenses_ByUser(String user);
 
-    public List<Expense> getAllExpenses_ByType(String Type);
+    public List<Expense> getAllExpenses_ByType(String Type,String user);
 
     public Expense getExpenseById(int id);
 
@@ -25,8 +25,8 @@ public interface expenseDAO {
 //    public void AddExpense(Expense expense);
 //    public Expense UpdateExpense(Expense expense);
 //    public void DeleteExpense(int id);
-    public int get_Expense_Amount();
+    public int get_Expense_Amount(String user);
 
-    public int get_Income_Amount();
+    public int get_Income_Amount(String user);
 
 }

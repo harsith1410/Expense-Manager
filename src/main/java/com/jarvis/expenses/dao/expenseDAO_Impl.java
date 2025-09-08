@@ -29,12 +29,13 @@ public class expenseDAO_Impl implements expenseDAO{
     }
 
     @Override
-    public List<Expense> getAllExpenses_ByType(String type) {
+    public List<Expense> getAllExpenses_ByType(String type,String user) {
 
         TypedQuery<Expense> Query = em.createQuery(
-                "select e from Expense e where e.expense_type = :type", Expense.class
+                "select e from Expense e where e.expense_type = :type and e.expenseUser=:user", Expense.class
         );
         Query.setParameter("type", type);
+        Query.setParameter("user", user);
         List<Expense> expenses = Query.getResultList();
 
         return expenses;
@@ -70,8 +71,8 @@ public class expenseDAO_Impl implements expenseDAO{
     }
 
     @Override
-    public int get_Expense_Amount() {
-        List<Expense> expenses = getAllExpenses_ByType("EXPENSE");
+    public int get_Expense_Amount(String user) {
+        List<Expense> expenses = getAllExpenses_ByType("EXPENSE",user);
         int amt = 0;
         for (Expense expense : expenses) {
             amt += expense.getAmount();
@@ -80,8 +81,8 @@ public class expenseDAO_Impl implements expenseDAO{
     }
 
     @Override
-    public int get_Income_Amount() {
-        List<Expense> expenses = getAllExpenses_ByType("INCOME");
+    public int get_Income_Amount(String user) {
+        List<Expense> expenses = getAllExpenses_ByType("INCOME",user);
         int amt = 0;
         for (Expense expense : expenses) {
             amt += expense.getAmount();
